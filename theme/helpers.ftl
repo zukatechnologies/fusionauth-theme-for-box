@@ -27,7 +27,7 @@
 
 [#macro html]
 <!DOCTYPE html>
-<html lang="en">
+<html dir="ltr" lang="en">
   [#nested/]
 </html>
 [/#macro]
@@ -41,6 +41,10 @@
   <meta name="author" content="FusionAuth">
   <meta name="description" content="${description}">
   <meta name="robots" content="index, follow">
+  <meta name="x-apple-disable-message-reformatting" />
+
+  [#-- Logo Image --]
+  <link rel="preload" as="image" href="/static/vercel-logo.png" />
 
   [#-- https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy --]
   <meta name="referrer" content="strict-origin">
@@ -145,7 +149,7 @@
 [/#macro]
 
 [#macro body]
-<body class="app-sidebar-closed bg-gray-100 font-['Poppins']">
+<body class="app-sidebar-closed bg-gray-100 font-['Poppins'] mx-auto my-auto bg-white px-2 font-sans">
 <main style="padding-top: 0px;">
   [#nested/]
 </main>
@@ -265,8 +269,9 @@
 [/#macro]
 
 [#macro splitMain title="Login" subtitle="" splitSideImage="/placeholder.svg"]
-<main class="grid min-h-svh lg:grid-cols-2">
-  <div class="flex flex-col gap-4 p-6 md:p-10">    
+<main class="flex flex-row min-h-svh">
+  
+  <div class="flex flex-1 flex-col gap-4 p-6 md:p-10">
     <div class="hidden flex justify-center gap-2 md:justify-start" data-in-progress>
         <a href="#" class="flex items-center gap-2 font-medium">
             <div class="bg-black text-white flex size-6 items-center justify-center rounded-md">
@@ -302,8 +307,13 @@
     </div>
   </div>
   
-  <div class="relative hidden lg:block pt-6 pb-6 pr-6">
-      <div class="h-full w-full rounded-2xl bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%">
+  <div class="flex-1 relative hidden lg:block pt-6 pb-6 pr-6">
+      <div 
+        class="h-full w-full rounded-2xl" 
+        style="
+          background: radial-gradient(at 42% 73%, #9adcff 0px, transparent 50%), radial-gradient(at 80% 90%, #fff89a 0px, transparent 50%), radial-gradient(at 88% 90%, #ffb2a6 0px, transparent 50%), radial-gradient(at 1% 93%, #ff8aae 0px, transparent 50%), #F3A5F8;
+        "
+      >
       </div>
   </div>
   
@@ -709,15 +719,6 @@
         [/#if]
 
         [#if identityProviders["Google"]?has_content]
-        <div>
-          [@googleButton identityProvider=identityProviders["Google"][0] clientId=clientId idpRedirectState=idpRedirectState/]
-        </div>
-        <div>
-          [@googleButton identityProvider=identityProviders["Google"][0] clientId=clientId idpRedirectState=idpRedirectState/]
-        </div>
-        <div>
-          [@googleButton identityProvider=identityProviders["Google"][0] clientId=clientId idpRedirectState=idpRedirectState/]
-        </div>
         <div>
           [@googleButton identityProvider=identityProviders["Google"][0] clientId=clientId idpRedirectState=idpRedirectState/]
         </div>
